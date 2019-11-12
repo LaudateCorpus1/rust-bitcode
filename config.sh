@@ -5,12 +5,25 @@
 # Target: x86_64-apple-darwin18.7.0
 
 # So this branch seems a likely candidate
-SWIFT_BRANCH="swift-5.0-branch"
+# SWIFT_BRANCH="swift-5.0-branch"
 
 # 2. Pick/install a working Rust nightly (ideally one where RLS and clippy built)
 # 3. Note its date
-RUST_NIGHTLY="2019-09-05"
+# RUST_NIGHTLY="2019-09-05"
 
 # 4. Get its commit - this is what we will check out to build the iOS version
 # rustc --version | cut -d '(' -f2 | cut -d ' ' -f1
-RUST_COMMIT="c6e9c76c5"
+# RUST_COMMIT="c6e9c76c5"
+
+if [[ -z "${SWIFT_BRANCH}" ]]; then
+    echo "SWIFT_BRANCH not set."
+    exit 1
+fi
+if [[ -z "${RUST_NIGHTLY}" ]]; then
+    echo "RUST_NIGHTLY not set."
+    exit 1
+fi
+if [[ -z "${RUST_COMMIT}" ]]; then
+    echo "RUST_COMMIT not set."
+    exit 1
+fi
