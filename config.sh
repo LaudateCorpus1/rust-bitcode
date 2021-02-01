@@ -1,29 +1,30 @@
-# 1. Select the best branch from https://github.com/apple/swift-llvm
-
+# 1. Select the best branch, tag or commit hash from https://github.com/apple/llvm-project
+# The recommended approach is to use the tagged release that matches the Swift version
+# returned by the command below:
 # $ xcrun -sdk iphoneos swiftc --version
-# Apple Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)
-# Target: x86_64-apple-darwin18.7.0
 
-# So this branch seems a likely candidate
-# SWIFT_BRANCH="swift-5.0-branch"
+# LLVM_BRANCH="tags/swift-5.3.2-RELEASE"
 
-# 2. Pick/install a working Rust nightly (ideally one where RLS and clippy built)
-# 3. Note its date
-# RUST_NIGHTLY="2019-09-05"
-
-# 4. Get its commit - this is what we will check out to build the iOS version
-# rustc --version | cut -d '(' -f2 | cut -d ' ' -f1
-# RUST_COMMIT="c6e9c76c5"
-
-if [[ -z "${SWIFT_BRANCH}" ]]; then
-    echo "SWIFT_BRANCH not set."
+if [[ -z "${LLVM_BRANCH}" ]]; then
+    echo "LLVM_BRANCH not set."
     exit 1
 fi
-if [[ -z "${RUST_NIGHTLY}" ]]; then
-    echo "RUST_NIGHTLY not set."
+
+# 2. Select the best branch, tag or commit hash from https://github.com/rust-lang/rust
+
+# RUST_BRANCH="1d0d76f8dd4f5f6ecbeab575b87edaf1c9f56bb8" # nightly-2021-01-25
+
+if [[ -z "${RUST_BRANCH}" ]]; then
+    echo "RUST_BRANCH not set."
     exit 1
 fi
-if [[ -z "${RUST_COMMIT}" ]]; then
-    echo "RUST_COMMIT not set."
+
+# 3. Select a name for the toolchain you want to install as. The toolchain will be installed
+# under $HOME/.rustup/toolchains/rust-$RUST_TOOLCHAIN
+
+# RUST_TOOLCHAIN="ios-arm64-nightly-2021-01-25"
+
+if [[ -z "${RUST_TOOLCHAIN}" ]]; then
+    echo "RUST_TOOLCHAIN not set."
     exit 1
 fi
